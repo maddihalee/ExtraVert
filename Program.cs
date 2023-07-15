@@ -117,7 +117,20 @@ else if (choice == "3")
 }
 else if (choice == "4")
 {
-  
+  for (int i = 0; i < plants.Count; i++)
+  {
+    Console.WriteLine($"{i + 1}. {plants[i].Species}");
+  }
+    int response = int.Parse(Console.ReadLine().Trim());
+   if (response >= 1 && response <= plants.Count)
+   {
+    plants.RemoveAt(response - 1);
+    Console.WriteLine("Plant removed successfully.");
+   }
+   else
+   {
+    Console.WriteLine("Invalid input. Please enter an integer.");
+   }
 }
 else if (choice == "0")
 {
