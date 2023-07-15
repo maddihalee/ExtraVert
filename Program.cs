@@ -62,6 +62,7 @@ Console.WriteLine(@"Main Menu:
 3. Adopt a plant
 4. Delist a plant
 5. See plant of the day
+6. Search for a plant
 0. End");
 choice = Console.ReadLine();
 
@@ -145,6 +146,25 @@ else if (choice == "5")
     randomPlant = plants[randomIndex];
   }
   Console.WriteLine($"A {randomPlant.Species} in {randomPlant.City} that is level {randomPlant.LightNeeds} in light needs is {randomPlant.AskingPrice} dollars");
+}
+else if (choice == "6")
+{
+  Console.WriteLine("Enter a maximum light needs number between 1 and 5: ");
+  List<Plant> plantsWithLowerLightNeeds = new List<Plant>();
+  int maxLightNeeds = int.Parse(Console.ReadLine().Trim());
+
+  foreach (Plant plant in plants)
+  {
+    if (plant.LightNeeds <= maxLightNeeds)
+    {
+      plantsWithLowerLightNeeds.Add(plant);
+    }
+  }
+  Console.WriteLine($"Plants with {maxLightNeeds} or lower: ");
+  foreach (Plant plant in plantsWithLowerLightNeeds)
+  {
+    Console.WriteLine(plant.Species);
+  }
 }
 else if (choice == "0")
 {
