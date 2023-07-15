@@ -2,7 +2,7 @@
 
 Console.WriteLine(greeting);
 
-List<Plant> Plants = new List<Plant>() 
+List<Plant> plants = new List<Plant>() 
 {
  new Plant()
  {
@@ -65,9 +65,9 @@ choice = Console.ReadLine();
 if (choice == "1")
 {
   Plant chosenPlant = new Plant();
-  for (int i = 0; i < Plants.Count; i++)
+  for (int i = 0; i < plants.Count; i++)
   {
-     Console.WriteLine($"A {Plants[i].Species} in {Plants[i].City} {(Plants[i].Sold ? "was sold" : "is available")} for {Plants[i].AskingPrice} dollars.");
+     Console.WriteLine($"A {plants[i].Species} in {plants[i].City} {(plants[i].Sold ? "was sold" : "is available")} for {plants[i].AskingPrice} dollars.");
   }
 }
 else if (choice == "2")
@@ -90,15 +90,34 @@ else if (choice == "2")
     City = City,
     ZIP = ZIP
   };
-  Plants.Add(newPlant);
+  plants.Add(newPlant);
 }
 else if (choice == "3")
 {
-  throw new NotImplementedException("Adopt a plant");
+  Console.WriteLine("Choose a plant to buy: ");
+    for (int i = 0; i < plants.Count; i++)
+    {
+      if (!plants[i].Sold)
+      {
+        Console.WriteLine($"{i + 1}. {plants[i].Species}");
+      }
+    }
+    int plantIndex = int.Parse(Console.ReadLine().Trim());
+    Plant selectedPlant = plants[plantIndex - 1];
+    if (!selectedPlant.Sold)
+    {
+      selectedPlant.Sold = true;
+      Console.WriteLine($"Congratulations! You have bought the {selectedPlant.Species} plant.");
+    }
+    else
+    {
+      Console.WriteLine("Invalid input. Please enter an integer.");
+    }
+
 }
 else if (choice == "4")
 {
-  throw new NotImplementedException("Delist a plant");
+  
 }
 else if (choice == "0")
 {
