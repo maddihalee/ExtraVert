@@ -51,6 +51,8 @@ List<Plant> plants = new List<Plant>()
   }
 };
 
+Random random = new Random();
+
 string choice = null;
 while (choice != "0")
 {
@@ -59,6 +61,7 @@ Console.WriteLine(@"Main Menu:
 2. Post a plant to be adopted
 3. Adopt a plant
 4. Delist a plant
+5. See plant of the day
 0. End");
 choice = Console.ReadLine();
 
@@ -132,11 +135,22 @@ else if (choice == "4")
     Console.WriteLine("Invalid input. Please enter an integer.");
    }
 }
+else if (choice == "5")
+{
+  Plant randomPlant = null;
+
+  while (randomPlant == null || randomPlant.Sold)
+  {
+    int randomIndex = random.Next(0, plants.Count);
+    randomPlant = plants[randomIndex];
+  }
+  Console.WriteLine($"A {randomPlant.Species} in {randomPlant.City} that is level {randomPlant.LightNeeds} in light needs is {randomPlant.AskingPrice} dollars");
+}
 else if (choice == "0")
 {
   Console.WriteLine("See ya!");
 }
-else if (choice != "1" || choice != "2" || choice != "3" || choice != "4" || choice != "5")
+else if (choice != "1" || choice != "2" || choice != "3" || choice != "4")
 {
   Console.WriteLine("Please choose an existing menu item!");
 }
