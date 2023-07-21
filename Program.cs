@@ -68,6 +68,7 @@ Console.WriteLine(@"Main Menu:
 4. Delist a plant
 5. See plant of the day
 6. Search for a plant
+7. See plant stats
 0. End");
 choice = Console.ReadLine();
 
@@ -181,16 +182,47 @@ else if (choice == "6")
   }
   Console.WriteLine($"Plants with {maxLightNeeds} or lower: ");
   foreach (Plant plant in plantsWithLowerLightNeeds)
-  {
-    Console.WriteLine(plant.Species);
-  }
+    {
+            Console.WriteLine(plant.Species);
+    }
 }
+else if (choice == "7")
+    {
+        double lowestPrice = plants.Min(plants => plants.AskingPrice);
+       foreach (Plant plant in plants)
+        {
+            if (plant.AskingPrice == lowestPrice)
+            {
+                Console.WriteLine($"The plant with the lowest price is the {plant.Species} which costs {plant.AskingPrice} dollars.");
+            }
+        }
+        double numberofPlants = plants.Count();
+        Console.WriteLine($"There are {numberofPlants} plants listed currently.");
+
+        double highestNeeds = plants.Max(plants => plants.LightNeeds);
+        foreach (Plant plant in plants)
+        {
+            if (plant.LightNeeds ==  highestNeeds)
+        {
+            Console.WriteLine($"The plant with the highest light needs is the {plant.Species} with a value of {plant.LightNeeds}");
+        }
+       }
+        int totalLightNeeds = 0;
+        int numberOfPlants = plants.Count;
+        foreach (Plant plant in plants)
+        {
+            totalLightNeeds += plant.LightNeeds;
+        }
+        double avgLightNeeds = (double)totalLightNeeds / numberOfPlants;
+            Console.WriteLine($"The average plant's light needs is {avgLightNeeds}");
+   
+    }
 else if (choice == "0")
 {
-  Console.WriteLine("See ya!");
+        Console.WriteLine("See ya!");
 }
 else if (choice != "1" || choice != "2" || choice != "3" || choice != "4")
 {
-  Console.WriteLine("Please choose an existing menu item!");
+        Console.WriteLine("Please choose an existing menu item!");
 }
 }
